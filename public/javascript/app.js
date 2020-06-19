@@ -57,7 +57,6 @@ weatherForm.addEventListener('submit', (e) => {
             } else {
 
                 // messageOne.textContent = JSON.stringify(data);
-                // console.log(data);
                 // console.log(data.weather_details.temperature)
                 // messageTwo.textContent = data.forecast
                 messageOne.textContent = ""
