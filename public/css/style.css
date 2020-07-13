@@ -35,14 +35,14 @@ h1 {
     display: inline-block;
 }
 
-.image {
-    background-color: bisque;
-    width: 50%;
-}
-
-.image:hover {
+#mapid:hover {
     outline: 5px solid red;
     outline-offset: 10px;
+}
+
+#mapid {
+    height: 400px;
+    width: 50vw;
 }
 
 .link,
@@ -74,7 +74,6 @@ body {
     margin: 300px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 

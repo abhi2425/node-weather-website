@@ -1,21 +1,8 @@
-/*
-fetch('http://localhost:3000/weather?address=delhi').then((response) => {
-    response.json().then((data) => {
-        if (data.error) {
-            console.log(data.error);
-        } else {
-            console.log(data);
-        }
-    })
-});
-*/
 console.log("Client Side Js Loaded")
-
 
 const weatherForm = document.querySelector('form')
 const search = document.querySelector('input')
 const messageOne = document.querySelector('#message-1')
-    // const messageTwo = document.querySelector('#message-2')
 const columnHeading1 = document.querySelector('.column__heading--1')
 const columnHeading2 = document.querySelector('.column__heading--2')
 const cell1 = document.querySelector(".cell-1")
@@ -36,18 +23,22 @@ const cell15 = document.querySelector(".cell-15")
 const cell16 = document.querySelector(".cell-16")
 const cell17 = document.querySelector(".cell-17")
 const cell18 = document.querySelector(".cell-18")
-
 const result = document.querySelector(".result")
 
-
+const mymap = L.map('mapid').setView([0, 0], 1);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiYWJoaWluMjQyNSIsImEiOiJja2JqNTQxcWowa215MnNteTdpd2FkYWwyIn0.IOQupMMNwtszul5Wfhc3XQ'
+}).addTo(mymap);
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
-
     const location = search.value
-
     messageOne.textContent = 'Loading...'
-        //messageTwo.textContent = ''
 
     fetch('/weather?address=' + location).then((response) => {
         response.json().then((data) => {
@@ -56,10 +47,8 @@ weatherForm.addEventListener('submit', (e) => {
                 messageOne.textContent = data.error
             } else {
 
-                // messageOne.textContent = JSON.stringify(data);
-                // console.log(data.weather_details.temperature)
-                // messageTwo.textContent = data.forecast
                 messageOne.textContent = ""
+                L.marker([data.address.latitude, data.address.longitude]).addTo(mymap);
 
                 result.style = "background-color: #eee;"
                 columnHeading1.style = "background-color: #111"
@@ -91,9 +80,6 @@ weatherForm.addEventListener('submit', (e) => {
 
                 cell17.textContent = "Climate"
                 cell18.textContent = data.weather_details.climate
-
-
-
             }
         })
     })
