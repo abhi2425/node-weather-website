@@ -49,6 +49,7 @@ weatherForm.addEventListener('submit', (e) => {
 
                 messageOne.textContent = ""
                 L.marker([data.address.latitude, data.address.longitude]).addTo(mymap);
+                mymap.setView([data.address.latitude, data.address.longitude], 8)
 
                 result.style = "background-color: #eee;"
                 columnHeading1.style = "background-color: #111"
