@@ -1,7 +1,9 @@
 const request = require("request");
+require('dotenv').config()
+const key = process.env.WEATHER_API_KEY
 
 function forecast(address, callback) {
-    const url = "https://api.weatherapi.com/v1/current.json?key=24186da08fcd4ae399981946201706&q=" + address + " ";
+    const url = "https://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + address + " ";
 
     request({ url, json: true }, (error, { body } = {}) => {
         if (error) {
